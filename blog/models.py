@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -27,6 +28,7 @@ class Post(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="categories")
     image = models.ImageField(blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
     slug = models.SlugField(unique=True, blank=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
