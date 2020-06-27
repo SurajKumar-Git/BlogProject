@@ -13,5 +13,23 @@ class Comment(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
+    def set_message(self, message):
+        self.message = message
+
+    def get_message(self):
+        return self.message
+
+    def set_post(self, post):
+        self.post = post
+
+    def get_post(self):
+        return self.post
+
+    def set_user(self, user):
+        self.user = user
+
+    def get_user(self):
+        return self.user
+
     def __str__(self):
         return self.message
