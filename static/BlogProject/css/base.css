@@ -1,0 +1,13 @@
+body {
+    font-family: 'Raleway', sans-serif;
+    min-height:100vh;
+    background-color: #f2f6ff;
+}
+
+.footer {
+    background-color: aqua;
+}
+
+.footer-copyright {
+    background-color: aquamarine;
+}
