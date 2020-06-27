@@ -4,11 +4,20 @@ from django.conf import settings
 # Create your models here.
 
 
+class LikeQuerySet(models.QuerySet):
+
+    def post_like_count(self, post_id):
+        return self.filter(post__id=post_id).count()
+
+
 class Like(models.Model):
 
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
+
+    objects = models.manager()
+    likes = LikeQuerySet.as_manager()
 
     def set_post(self, post):
         self.post = post

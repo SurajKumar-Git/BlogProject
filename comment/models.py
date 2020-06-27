@@ -4,6 +4,12 @@ from blog.models import Post
 # Create your models here.
 
 
+class CommentQuerySet(models.QuerySet):
+
+    def post_comments(self, post_id):
+        return self.filter(post__id=post_id)
+
+
 class Comment(models.Model):
 
     message = models.TextField()
@@ -12,6 +18,9 @@ class Comment(models.Model):
                              on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
+
+    objects = models.manager()
+    comments = CommentQuerySet.as_manager()
 
     def set_message(self, message):
         self.message = message
