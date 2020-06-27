@@ -5,11 +5,19 @@ from django.conf import settings
 # Create your models here.
 
 
+class CategoryQuerySet(models.QuerySet):
+    pass
+
+
 class Category(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField()
     slug = models.SlugField(unique=True, blank=True)
+
+    # Model Monagers
+    objects = models.Manager()
+    categories = CategoryQuerySet.as_manager()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
