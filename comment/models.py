@@ -19,7 +19,7 @@ class Comment(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
-    objects = models.manager()
+    objects = models.Manager()
     comments = CommentQuerySet.as_manager()
 
     def set_message(self, message):

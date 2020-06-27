@@ -16,7 +16,7 @@ class Like(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
 
-    objects = models.manager()
+    objects = models.Manager()
     likes = LikeQuerySet.as_manager()
 
     def set_post(self, post):
