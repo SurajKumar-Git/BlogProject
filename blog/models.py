@@ -54,7 +54,7 @@ class Post(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.set_slug(slugify(self.title))
         super().save(*args, **kwargs)
 
     def set_title(self, title):
