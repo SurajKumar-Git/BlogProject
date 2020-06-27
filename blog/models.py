@@ -37,6 +37,21 @@ class Category(models.Model):
         return self.name
 
 
+class PostQuerySet(models.QuerySet):  # Custom Model Manager
+
+    def published_posts(self):
+        return self.filter(status="P")
+
+    def draft_posts(self):
+        return self.filter(status="D")
+
+    def author_posts(self, author_id):
+        return self.filter(author__id=author_id)
+
+    def category_posts(self, category_id):
+        return self.filter(category__id=category_id)
+
+
 class Post(models.Model):
     statuses = [('D', 'Draft'), ('P', 'Published')]
 
@@ -52,6 +67,10 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    # Model Monagers
+    objects = models.Manager()
+    posts = PostQuerySet.as_manager()
 
     def save(self, *args, **kwargs):
         self.set_slug(slugify(self.title))
