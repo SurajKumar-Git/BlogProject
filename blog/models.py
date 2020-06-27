@@ -15,6 +15,24 @@ class Category(models.Model):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+    def set_name(self, name):
+        self.name = name
+
+    def get_name(self):
+        return self.name
+
+    def set_description(self, description):
+        self.description = description
+
+    def get_description(self):
+        return self.description
+
+    def set_slug(self, slug):
+        self.slug = slug
+
+    def get_slug(self):
+        return self.slug
+
     def __str__(self):
         return self.name
 
@@ -38,6 +56,57 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    def set_title(self, title):
+        self.title = title
+
+    def get_title(self):
+        return self.title
+
+    def set_description(self, description):
+        self.description = description
+
+    def get_description(self):
+        return self.description
+
+    def set_content(self, content):
+        self.content = content
+
+    def get_content(self):
+        return self.content
+
+    def set_status(self, status):
+        if status in ("D", "P"):
+            self.status = status
+        else:
+            raise ValueError    # Need to Add more info on setters
+
+    def get_status(self):
+        return self.status
+
+    def set_category(self, category):
+        self.category = category
+
+    def get_category(self):
+        return self.category
+
+    def set_image(self, image):
+        self.image = image
+
+    def get_image(self):
+        return self.image
+
+    def set_slug(self, slug):
+        self.slug = slug
+
+    def get_slug(self):
+        return self.slug
+
+    def set_author(self, author):
+        self.author = author
+
+    def get_author(self):
+        return self.author
 
     def __str__(self):
         return self.title
