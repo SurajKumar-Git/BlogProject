@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,10 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Blogs</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="{% static 'BlogProject/node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'BlogProject/css/base.css' %}">
 </head>
 
 <body>
 
+    <script type="text/javascript" src="{% static 'BlogProject/node_modules/jquery/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'BlogProject/node_modules/popper.js/dist/popper.min.js' %}"></script>
+    <script type="text/javascript"
+        src="{% static 'BlogProject/node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
 </body>
 
 </html>
