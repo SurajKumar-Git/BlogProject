@@ -107,6 +107,13 @@
     <script type="text/javascript" src="{% static 'BlogProject/node_modules/popper.js/dist/popper.min.js' %}"></script>
     <script type="text/javascript"
         src="{% static 'BlogProject/node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".clickable").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
     {% block script %}{% endblock%}
 </body>
 
