@@ -8,6 +8,39 @@
 {% endblock %}
 
 {% block content %}
+<div class="container-fluid content flex-fill">
+    <div class="card">
+        <form id="blog_post" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% for error in field.errors%}
+                <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <br>
+            <div class="form-group">
+                {% if Add_Update == 'Add Blog' %}
+                <input type="submit" class="btn btn-primary form-control" value="{{ Add_Update }}">
+                {% else %}
+                <div class="form-row ">
+                    <div class="col">
+                        <input type="submit" class="btn btn-primary form-control" value="{{ Add_Update }}">
+                    </div>
+                    <div class="col">
+                        <a class="form-control btn btn-danger"
+                            href="{% url 'blog:delete_blog_post' post.slug %}">Delete</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
 
 {% block script %}
