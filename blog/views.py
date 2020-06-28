@@ -42,8 +42,8 @@ class BlogDetailView(generic.DetailView):
         return context
 
 
-class AddBlogPost(mixins.LoginRequiredMixin, generic.CreateView):
-    # permission_required = ('blog.add_post',)
+class AddBlogPost(mixins.LoginRequiredMixin, mixins.PermissionRequiredMixin, generic.CreateView):
+    permission_required = ('blog.add_post',)
     form_class = PostForm
     model = Post
     template_name = "blog/blog_form.html"
@@ -55,8 +55,8 @@ class AddBlogPost(mixins.LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-class UpdateBlogPost(mixins.LoginRequiredMixin, mixins.UserPassesTestMixin, generic.UpdateView):
-    # permission_required = ('blog.change_post',)
+class UpdateBlogPost(mixins.LoginRequiredMixin, mixins.PermissionRequiredMixin, mixins.UserPassesTestMixin, generic.UpdateView):
+    permission_required = ('blog.change_post',)
     form_class = PostForm
     model = Post
     template_name = "blog/blog_form.html"
@@ -68,8 +68,8 @@ class UpdateBlogPost(mixins.LoginRequiredMixin, mixins.UserPassesTestMixin, gene
         return self.request.user == Post.objects.get(slug=self.kwargs["slug"]).author
 
 
-class DeleteBlogPost(mixins.LoginRequiredMixin, mixins.UserPassesTestMixin, generic.DeleteView):
-    # permission_required = ('blog.delete_post',)
+class DeleteBlogPost(mixins.LoginRequiredMixin, mixins.PermissionRequiredMixin, mixins.UserPassesTestMixin, generic.DeleteView):
+    permission_required = ('blog.delete_post',)
     model = Post
     success_url = reverse_lazy('blog:home')
     template_name = "blog/delete_blog_post.html"
