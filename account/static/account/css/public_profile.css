@@ -1,0 +1,7 @@
+#posts table{
+    border-collapse: separate;
+}
+
+#posts thead th{
+    border: none;
+}

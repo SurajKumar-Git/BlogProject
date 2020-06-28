@@ -1,0 +1,60 @@
+.content {
+    margin-bottom: 20px;
+}
+
+.profile_pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.card-header .card-text {
+    margin: auto 20px;
+}
+
+.card-header .card-title {
+    font-weight: 600;
+    font-size: xx-large;
+}
+
+.profile_nav .nav-link {
+    color: #000;
+    outline: none;
+}
+
+#user_info {
+    display: none;
+}
+
+#posts {
+    display: block;
+}
+
+.body-content {
+    margin-top: 10px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.first-row th, .first-row td, .first-row{
+    border: none;
+}
+
+tr {
+    border-top: 1px solid #dee2e6;
+}
+
+.no-line-link {
+    outline: none;
+}
+
+.no-line-link:hover {
+    text-decoration: none;
+}
+
+.link-black {
+    color: black;
+}
+

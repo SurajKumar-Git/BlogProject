@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_link %}
+<link href="{% static 'account/css/profile.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container content flex-fill">
+    <div class="card profile_card">
+        <div class="card-header text-center">
+            <img class="img-fluid img-thumbnail profile_pic" src="{{ user.pic.url }}" alt="Profile pic" />
+            <h3 class="card-title">{{ user.get_full_name }}</h3>
+            <p class="card-text">{{ user.bio }}</p>
+        </div>
+        <div class="card-body">
+            <ul class="nav nav-tabs profile_nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" data-toggle="tab" onclick="posts()">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="tab" onclick="user_info()">User Info</a>
+                </li>
+
+                {% comment %}
+                <li class="nav-item ml-auto">
+                    <a href="{% url 'account:update_user_profile' user.slug %}" class="btn btn-primary">Edit Profile</a>
+                </li>
+                {% endcomment %}
+
+            </ul>
+            <div id="user_info" class="body-content">
+                <table class="table">
+                    <tr class="first-row">
+                        <th>User Name</th>
+                        <td>{{ user.get_username }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+
+                    {% comment %}
+                    {% include "account/social_account.html" %}
+                    {% endcomment %}
+
+                </table>
+            </div>
+            <div id="posts" class="body-content">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="first-row">
+                            <th>Title</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for post in author_posts %}
+                        <tr>
+                            <th class="clickable">
+                                {{ post.title }}</th>
+                            <td class="text-center">{{ post.get_status_display }}</td>
+                            <td class="text-center"><a class="no-line-link"
+                                    href="{% url 'blog:update_blog_post' post.slug %}"><i class="fas fa-edit"></i></a>
+                            </td>
+                            <td class="text-center"><a class="no-line-link"
+                                    href="{% url 'blog:delete_blog_post' post.slug %}"><i
+                                        class="fa fa-trash text-danger" aria-hidden="true"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="text-muted">Last Login - {{ user.last_login }}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    function posts() {
+        document.getElementById("posts").style.display = "block";
+        document.getElementById("user_info").style.display = "none";
+    }
+
+    function user_info() {
+        document.getElementById("posts").style.display = "none";
+        document.getElementById("user_info").style.display = "block";
+    }
+</script>
+{% endblock%}
