@@ -20,3 +20,15 @@ class RegisterForm(UserCreationForm):
             'username': 'Letters, digits and @/./+/-/_ only.',
             'password2': 'Enter the same password as before, for verification.',
         }
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ["first_name", "last_name", "email", "bio", "pic"]
+
+    def clean_pic(self):
+        pic = self.cleaned_data.get("pic")
+        if pic and pic.size > (102400):  # 100 KB
+            raise forms.ValidationError("Image size greater than 100 KB")
+        return pic
