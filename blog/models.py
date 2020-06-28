@@ -152,3 +152,9 @@ class Post(models.Model):
 
     def get_post_comments_count(self):
         return self.get_post_comments().count()
+
+    def get_post_like(self, user):
+        return self.post_likes.filter(user=user)
+
+    def is_liked_post(self, user):
+        return self.get_post_like(user).exists()
