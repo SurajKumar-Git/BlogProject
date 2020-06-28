@@ -3,7 +3,9 @@ from django.contrib.auth import views
 from django.contrib.auth import forms
 from django.views import generic
 from django.urls import reverse, reverse_lazy
-from account.forms import LoginForm
+from account.forms import LoginForm, RegisterForm
+from django.contrib.auth import get_user_model, authenticate, login
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 
@@ -14,7 +16,23 @@ class LoginView(views.LoginView):
 
 
 class RegisterView(generic.CreateView):
-    pass
+    model = get_user_model()
+    form_class = RegisterForm
+    template_name = "account/register.html"
+    success_url = reverse_lazy("blog:home")
+
+    def get(self, request, *args, **kwargs):
+        # Authenticated user should not access register page.
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy("blog:home"))
+        return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        http_redirect_response = super().form_valid(form)
+        new_user = authenticate(
+            username=form.cleaned_data["username"], password=form.cleaned_data["password1"])
+        login(self.request, new_user)
+        return http_redirect_response
 
 
 class PasswordResetView(views.PasswordResetView):
