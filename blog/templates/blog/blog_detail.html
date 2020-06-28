@@ -12,7 +12,9 @@
     <div class="col-sm-9 left-section">
         <div class="card blog_detail">
             <h4 class="card-title blog_title">{{ post.get_title }}</h4>
+            {% if  post.get_image %}
             <img class="card-img-top" src="{{ post.get_image.url }}" alt="Card image cap" height="600px">
+            {% endif %}
             <div class="card-body">
                 <p class="date">Last Updated - {{ post.modified_date }}</p>
                 <p class="card-text">{{ post.get_description }}</p>
@@ -20,7 +22,7 @@
             </div>
             <div class="card-footer d-flex flex-row align-content-stretch flex-nowrap">
                 <div class="blog_author_avatar">
-                    <img class="rounded-circle clickable" src="{{ post.get_author.get_pic.url }}" data-href="#">
+                    <img class="rounded-circle clickable" src="{{ post.get_author.get_pic.url}}" data-href="#">
                 </div>
                 <div class="author">
                     <h5 class="name clickable" data-href="">
