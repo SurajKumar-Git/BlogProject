@@ -23,13 +23,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="tab" onclick="user_info()">User Info</a>
                 </li>
-
-                {% comment %}
                 <li class="nav-item ml-auto">
-                    <a href="{% url 'account:update_user_profile' user.slug %}" class="btn btn-primary">Edit Profile</a>
+                    <a href="{% url 'account:edit_user_profile' user.slug %}" class="btn btn-primary">Edit Profile</a>
                 </li>
-                {% endcomment %}
-
             </ul>
             <div id="user_info" class="body-content">
                 <table class="table">
@@ -61,7 +57,7 @@
                     <tbody>
                         {% for post in author_posts %}
                         <tr>
-                            <th class="clickable">
+                            <th class="clickable" data-href="{% url 'blog:view_author_blog_detail' post.slug %}">
                                 {{ post.title }}</th>
                             <td class="text-center">{{ post.get_status_display }}</td>
                             <td class="text-center"><a class="no-line-link"
