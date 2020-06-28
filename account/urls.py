@@ -1,6 +1,7 @@
 from django.urls import path, include
-from account.views import LoginView, RegisterView
+from account.views import LoginView, RegisterView, PasswordChangeView, PasswordChangeDoneView
 from account.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+
 
 app_name = "account"
 urlpatterns = [
@@ -13,5 +14,8 @@ urlpatterns = [
          name='password_reset_confirm'),
     path('reset/done/', PasswordResetCompleteView.as_view(),
          name='password_reset_complete'),
+    path('password_change/', PasswordChangeView.as_view(), name='password_change'),
+    path('password_change/done/', PasswordChangeDoneView.as_view(),
+         name='password_change_done'),
     path("", include("django.contrib.auth.urls")),
 ]
