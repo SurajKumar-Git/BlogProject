@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from blog.models import Post, Category
 from django.views import generic
+from django.contrib.auth import mixins
+from django.urls import reverse_lazy
+from blog.forms import PostForm
 
 # Create your views here.
 
@@ -37,3 +40,16 @@ class BlogDetailView(generic.DetailView):
         context = super().get_context_data(**kwargs)
 
         return context
+
+
+class AddBlogPost(mixins.LoginRequiredMixin, generic.CreateView):
+    # permission_required = ('blog.add_post',)
+    form_class = PostForm
+    model = Post
+    template_name = "blog/blog_form.html"
+    success_url = reverse_lazy('account:home')
+    extra_context = {"Add_Update": "Add Blog"}
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
