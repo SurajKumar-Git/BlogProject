@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'comment.apps.CommentConfig',
     'like.apps.LikeConfig',
     'widget_tweaks',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
