@@ -38,7 +38,13 @@ class BlogDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        post = context.get("post")
+        if self.request.user.is_authenticated:
+            context['is_liked'] = post.is_liked_post(self.request.user)
+        context["like_count"] = post.get_post_like_count()
+        context["comments"] = post.get_post_comments().order_by(
+            "-date_modified")
+        context["comments_count"] = post.get_post_comments_count()
         return context
 
 
@@ -95,3 +101,15 @@ class AuthorBlogsPublished(generic.ListView):
     def get_queryset(self):
         # Modify query set
         return super().get_queryset().filter(author__slug=self.kwargs["slug"], status="P")
+
+
+# To show blogs to author, both draft and published
+class AuthorBlogsDetailView(mixins.LoginRequiredMixin, mixins.PermissionRequiredMixin, mixins.UserPassesTestMixin, BlogDetailView):
+    permission_required = ('blog.view_post',)
+    queryset = None
+
+    def get_queryset(self):
+        return super().get_queryset().filter(author=self.request.user)
+
+    def test_func(self):
+        return self.request.user == Post.objects.get(slug=self.kwargs["slug"]).author
