@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import views
+from django.contrib.auth import forms
 from django.views import generic
 from django.urls import reverse, reverse_lazy
 from account.forms import LoginForm
@@ -33,3 +34,18 @@ class PasswordResetConfirmView(views.PasswordResetConfirmView):
 
 class PasswordResetCompleteView(views.PasswordResetCompleteView):
     template_name = "account/password_reset_complete.html"
+
+
+class PasswordChangeView(views.PasswordChangeView):
+    template_name = "account/password_change_form.html"
+    success_url = reverse_lazy("account:password_change_done")
+
+    def get_form_class(self):
+        if self.request.user.has_usable_password():
+            return forms.PasswordChangeForm
+        else:
+            return forms.SetPasswordForm   # if user password is not set
+
+
+class PasswordChangeDoneView(views.PasswordChangeDoneView):
+    template_name = "account/password_change_done.html"
