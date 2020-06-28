@@ -4,6 +4,9 @@ body {
     background-color: #f2f6ff;
 }
 
+.content {
+    margin-top: 100px;
+}
 .footer {
     background-color: aqua;
 }
