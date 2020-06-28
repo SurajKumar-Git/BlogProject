@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'comment.apps.CommentConfig',
     'like.apps.LikeConfig',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +134,16 @@ MEDIA_URL = "/media/"
 
 # Auth User Model
 AUTH_USER_MODEL = "account.User"
+
+# Auth Settings
+LOGIN_REDIRECT_URL = reverse_lazy("blog:home")
+LOGOUT_REDIRECT_URL = reverse_lazy("account:login")
+
+
+# Email Backend Settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# Login Url Setting
+LOGIN_URL = reverse_lazy("account:login")
+LOGOUT_URL = reverse_lazy("account:logout")
