@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'like.apps.LikeConfig',
     'widget_tweaks',
     'django_summernote',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
