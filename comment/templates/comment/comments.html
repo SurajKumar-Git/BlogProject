@@ -1,0 +1,38 @@
+<div class="add_comment">
+    <div class="form-group row text-center">
+        <div class="col-sm-1 mx-auto">
+            <img src="{{ user.get_pic.url }}" class="rounded-circle z-depth-0" alt="avatar image" height="60">
+        </div>
+        <div class="col-sm-11 py-2">
+            <form method="post" class="comment_form" action="{% url 'comment:post_comments' post.id %}">
+                {% csrf_token %}
+                <textarea placeholder="Write Your Comment" name="message" class="form-control" rows=2></textarea>
+                <div class="text-right mt-2">
+                    <button type="submit" class="btn btn-primary">Comment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<table class="table comments mt-3">
+    <tbody>
+        {% for comment in comments %}
+        <tr>
+            <td>
+                <div class="comment_box d-flex flex-row align-content-stretch">
+                    <div class="commenter_avatar">
+                        <img class="rounded-circle clickable" src="{{ comment.get_user.get_pic.url }}" data-href="#"
+                            height="60">
+                    </div>
+                    <div class="commenter ml-5">
+                        <h5 class="name clickable" data-href="">
+                            {{ comment.get_user.get_full_name }} | {{ comment.date_modified }}
+                        </h5>
+                        <p class="comment">{{ comment.get_message }}</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
