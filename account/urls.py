@@ -13,7 +13,7 @@ urlpatterns = [
     path("profile/<slug:slug>/view", PublicProfileView.as_view(),
          name="user_public_profile"),
     path("profile/<slug:slug>/update",
-         UpdateProfile.as_view(), name="update_user_profile"),
+         UpdateProfile.as_view(), name="edit_user_profile"),
     path('password_reset/', PasswordResetView.as_view(), name='password_reset'),
     path('password_reset/done/', PasswordResetDoneView.as_view(),
          name='password_reset_done'),
