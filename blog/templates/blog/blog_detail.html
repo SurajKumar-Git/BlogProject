@@ -64,4 +64,41 @@
 {% endblock %}
 
 {% block script %}
+<script>
+    $(document).ready(function (event) {
+        $(document).on("click", "#like_dislike", function (event) {
+            event.preventDefault();
+            var post_id = $(this).attr("value");
+            $.ajax({
+                type: 'POST',
+                url: '{% url "like:like_post" post.id %}',
+                data: { 'post_id': post_id, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
+                dataType: 'json',
+                success: function (response) {
+                    $('#like-section').html(response['form'])
+                },
+                error: function (response, e) {
+                    console.log(response.responseText);
+                },
+            });
+        });
+
+        $(document).on("submit", ".comment_form", function (event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "comment:post_comments" post.id %}',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    $('#comment-section').html(response['form']);
+                    $("#comments_count").html(response['comments_count']);
+                },
+                error: function (response, e) {
+                    console.log(response.responseText);
+                },
+            });
+        });
+    });
+</script>
 {% endblock%}
