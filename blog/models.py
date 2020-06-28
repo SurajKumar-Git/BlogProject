@@ -6,7 +6,9 @@ from django.conf import settings
 
 
 class CategoryQuerySet(models.QuerySet):
-    pass
+
+    def get_posts_count(self, category_id):
+        return self.get(id=category_id).post_category.filter(status="P").count()
 
 
 class Category(models.Model):
@@ -44,6 +46,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_no_of_posts(self):
+        return Category.categories.get_posts_count(self.id)
+
 
 class PostQuerySet(models.QuerySet):  # Custom Model Manager
 
@@ -56,8 +61,8 @@ class PostQuerySet(models.QuerySet):  # Custom Model Manager
     def author_posts(self, author_id):
         return self.filter(author__id=author_id)
 
-    def category_posts(self, category_id):
-        return self.filter(category__id=category_id)
+    def category_posts(self, category_slug):
+        return self.filter(category__slug=category_slug)
 
 
 class Post(models.Model):
@@ -68,7 +73,7 @@ class Post(models.Model):
     content = models.TextField()
     status = models.CharField(max_length=1, choices=statuses, default='D')
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="categories")
+        Category, on_delete=models.CASCADE, related_name="post_category")
     image = models.ImageField(blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
@@ -137,3 +142,13 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_post_like_count(self):
+        return self.post_likes.all().count()
+        # return Like.likes.get_post_like_count(self.id)
+
+    def get_post_comments(self):
+        return self.post_comments.all()
+
+    def get_post_comments_count(self):
+        return self.get_post_comments().count()
