@@ -1,0 +1,47 @@
+.container-fluid {
+    width: 95%;
+    margin: 100px 0 0 5%;
+}
+
+.left-section {
+    padding-left: 20px;
+}
+
+.right-section {
+    padding: 0 30px;
+}
+
+.blog .card-img {
+    height: 220px;
+}
+
+.blog .card-title {
+    font-size: medium;
+    font-weight: bold;
+}
+
+.blog .card-text {
+    font-size: small;
+}
+
+.blog .card-footer {
+    background-color: white;
+    font-size: small;
+}
+
+.newsletter {
+    padding: 15px;
+}
+.newsletter h4 {
+    font-weight: 500;
+}
+
+.newsletter p{
+    font-size: small;
+    font-weight: 400;
+}
+
+.category thead th {
+    border: none;
+
+}

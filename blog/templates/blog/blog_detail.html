@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tech Source{% endblock %}
+
+{% block css_link %}
+<link rel="stylesheet" href="{% static 'blog/css/blog_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid row content flex-fill">
+    <div class="col-sm-9 left-section">
+        <div class="card blog_detail">
+            <h4 class="card-title blog_title">{{ post.get_title }}</h4>
+            <img class="card-img-top" src="{{ post.get_image.url }}" alt="Card image cap" height="600px">
+            <div class="card-body">
+                <p class="date">Last Updated - {{ post.modified_date }}</p>
+                <p class="card-text">{{ post.get_description }}</p>
+                <p class="card-text">{{ post.get_content }}</p>
+            </div>
+            <div class="card-footer d-flex flex-row align-content-stretch flex-nowrap">
+                <div class="blog_author_avatar">
+                    <img class="rounded-circle clickable" src="{{ post.get_author.get_pic.url }}" data-href="#">
+                </div>
+                <div class="author">
+                    <h5 class="name clickable" data-href="">
+                        {{ post.get_author.get_full_name }}</h5>
+                    <p class="about">{{ post.get_author.get_bio }}</p>
+                </div>
+            </div>
+        </div>
+        {% include 'blog/comment.html' %}
+    </div>
+    <div class="col-sm-3 right-section">
+        <div class="related-post">
+            <h4>Related Blogs</h4>
+            <div class="card mb-3">
+                <img class="card-img-top card-img" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
+                    alt="Card image cap" height="200">
+                <div class="card-body">
+                    <p class="card-title">Card Title</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <img class="card-img-top card-img" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
+                    alt="Card image cap" height="200">
+                <div class="card-body">
+                    <p class="card-title">Card Title</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <img class="card-img-top card-img" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
+                    alt="Card image cap" height="200">
+                <div class="card-body">
+                    <p class="card-title">Card Title</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock%}

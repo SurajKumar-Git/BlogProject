@@ -1,0 +1,53 @@
+.container-fluid {
+    width: 95%;
+    margin: 100px 0 50px 5%;
+}
+.blog_detail {
+    margin-bottom: 30px;
+}
+
+.blog_title {
+    font-size: x-large;
+    font-weight: 600;
+    padding: 20px 50px;
+    margin: 0;
+}
+
+.blog_detail .card-body {
+    padding: 30px 50px;
+}
+
+.card-footer {
+    padding: 30px 50px;
+    background-color: #fff;
+}
+
+.blog_author_avatar {
+    flex-basis: 10%;
+}
+
+.author {
+    margin-left: 20px;
+    flex-basis: 90%;
+    align-self: center;
+}
+
+.author .name {
+    color: #0096ff;
+    font-size: larger;
+    font-weight: 700;
+}
+
+.date {
+    color:#6c757d !important ;
+    font-size: medium;
+
+}
+
+.author .name a:hover{
+    text-decoration: none;
+}
+
+.author .about {
+    font-size: medium;
+}

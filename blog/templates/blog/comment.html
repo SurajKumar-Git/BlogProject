@@ -1,0 +1,65 @@
+<div class="likes_comments_section">
+    <div class="row">
+        <div class="col-12">
+            <div class="likes_comments">
+                <div class="likes_comments_details mb-3">
+                    <nav class="nav">
+                        <ul class="nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Like</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Share</a>
+                            </li>
+                        </ul>
+                        <ul class="nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">{{ post.get_post_like_count }} Likes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">{{ post.get_post_comments_count }} Comments</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="add_comment">
+                    <div class="form-group row text-center">
+                        <div class="col-sm-1">
+                            <img src="{{ user.get_pic.url }}" class="rounded-circle z-depth-0" alt="avatar image"
+                                height="60">
+                        </div>
+                        <div class="col-sm-11 py-2">
+                            <input type="text" placeholder="Write Your Comment" name="Add Comment" class="form-control">
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="cancel" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Comment</button>
+                    </div>
+                </div>
+                <table class="table comments mt-3">
+                    <tbody>
+                        {% for comment in post.get_post_comments %}
+                        <tr>
+                            <td>
+                                <div class="comment_box d-flex flex-row align-content-stretch">
+                                    <div class="commenter_avatar">
+                                        <img class="rounded-circle clickable" src="{{ comment.get_user.get_pic.url }}"
+                                            data-href="#" height="60">
+                                    </div>
+                                    <div class="commenter ml-5">
+                                        <h5 class="name clickable" data-href="">
+                                            {{ comment.get_user.get_full_name }} | {{ comment.date_modified }}
+                                        </h5>
+                                        <p class="comment">{{ comment.get_message }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
