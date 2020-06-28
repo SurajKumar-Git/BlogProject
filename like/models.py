@@ -12,7 +12,8 @@ class LikeQuerySet(models.QuerySet):
 
 class Like(models.Model):
 
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name="post_likes")
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
 
