@@ -53,3 +53,27 @@ class AddBlogPost(mixins.LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class UpdateBlogPost(mixins.LoginRequiredMixin, mixins.UserPassesTestMixin, generic.UpdateView):
+    # permission_required = ('blog.change_post',)
+    form_class = PostForm
+    model = Post
+    template_name = "blog/blog_form.html"
+    success_url = reverse_lazy('account:home')
+    extra_context = {"Add_Update": "Update Blog"}
+
+    # Update should not be accessible by other authors
+    def test_func(self):
+        return self.request.user == Post.objects.get(slug=self.kwargs["slug"]).author
+
+
+class DeleteBlogPost(mixins.LoginRequiredMixin, mixins.UserPassesTestMixin, generic.DeleteView):
+    # permission_required = ('blog.delete_post',)
+    model = Post
+    success_url = reverse_lazy('account:user_profile')
+    template_name = "blog/delete_blog_post.html"
+    context_object_name = "post"
+
+    def test_func(self):
+        return self.request.user == Post.objects.get(slug=self.kwargs["slug"]).author
