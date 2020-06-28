@@ -77,3 +77,21 @@ class DeleteBlogPost(mixins.LoginRequiredMixin, mixins.PermissionRequiredMixin, 
 
     def test_func(self):
         return self.request.user == Post.objects.get(slug=self.kwargs["slug"]).author
+
+
+class AuthorBlogs(generic.ListView):
+    model = Post
+    context_object_name = 'author_posts'
+    template_name = None
+
+    def get_queryset(self):
+        return super().get_queryset().filter(author=self.request.user)  # Modify query set
+
+
+class AuthorBlogsPublished(generic.ListView):
+    model = Post
+    context_object_name = 'published_author_posts'
+
+    def get_queryset(self):
+        # Modify query set
+        return super().get_queryset().filter(author__slug=self.kwargs["slug"], status="P")
