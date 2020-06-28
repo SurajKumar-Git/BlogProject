@@ -1,0 +1,16 @@
+{% if  user.is_authenticated %}
+<form action="{% url 'like:like_post' post.id %}" method="post">
+    {% csrf_token %}
+    {% if  is_liked %}
+    <button type="submit" id="like_dislike" name="post_id" value="{{ post.id }}"
+        class="btn btn-outline-danger">{{ like_count }}
+        <i class="far fa-thumbs-down"></i></button>
+    {% else %}
+    <button type="submit" id="like_dislike" name="post_id" value="{{ post.id }}"
+        class="btn btn-outline-primary">{{ like_count }} <i class="far fa-thumbs-up"></i></button>
+    {% endif %}
+</form>
+{% else %}
+<button type="button" class="btn btn-outline-primary disabled w-100">{{ like_count }} <i
+        class="far fa-thumbs-up"></i></button><br>
+{% endif %}
