@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Register{% endblock %}
+
+{% block css_link %}
+<link href="{% static 'account/css/register.css' %}" rel="stylesheet" />
+<link href="{% static 'account/css/base.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="container content flex-fill">
+    <div class="card" id="sign_up">
+        <div class="card-header custom_card_header">
+            Register
+        </div>
+        <div class="card-body">
+            <form id="sign_up_form" class="card_space" method="POST">
+                {% csrf_token %}
+                <div class="form-row form-group">
+                    <div class="col">
+                        {{ form.first_name.label_tag }}
+                        {{ form.first_name|add_class:"form-control" }}
+                    </div>
+                    <div class="col">
+                        {{ form.last_name.label_tag }}
+                        {{ form.last_name|add_class:"form-control" }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username|add_class:"form-control" }}
+                    <small id="user_name_help" class="form-text text-muted">{{ form.username.help_text }}</small>
+                    {% for error in form.username.errors%}
+                    <div class="invalid">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email|add_class:"form-control" }}
+                    <small id="emailHelp" class="form-text text-muted">{{ form.email.help_text }}</small>
+                    {% for error in form.email.errors%}
+                    <div class="invalid">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1|add_class:"form-control" }}
+                    <small id="password1_help" class="form-text text-muted">{{ form.password1.help_text }}</small>
+                    {% for error in form.password1.errors%}
+                    <div class="invalid">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password2.label_tag }}
+                    {{ form.password2|add_class:"form-control" }}
+                    <small id="password2_help" class="form-text text-muted">{{ form.password2.help_text }}</small>
+                    {% for error in form.password2.errors%}
+                    <div class="invalid">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary form-control" value="Register">
+                </div>
+                <p class="text-center">Already have an account? <a href="{% url 'account:login' %}">Login</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
