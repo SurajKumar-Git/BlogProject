@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Tech Source{% endblock %}
+
+{% block css_link %}
+<link rel="stylesheet" href="{% static 'account/css/login.css' %}">
+<link rel="stylesheet" href="{% static 'account/css/base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container flex-fill content">
+    <div class="card" id="login">
+        <div class="card-header custom_card_header">
+            Login
+        </div>
+        <div class="card-body">
+            <form id="login_form" class="card_space" method="POST">
+                {% csrf_token %}
+                {% for error in form.non_field_errors%}
+                <div class="invalid">{{ error }}</div>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="id_username" class="col-form-label">Username or Email:</label>
+                    {% render_field form.username class+="form-control" %}
+                </div>
+                <div class="form-group">
+                    <label for="id_password" class="col-form-label">Password:</label>
+                    {% render_field form.password class+="form-control" %}
+                </div>
+                <a href="{% url 'account:password_reset' %}">Forget Password?</a>
+
+                <br><br>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary form-control" value="Login">
+                </div>
+            </form>
+
+            {% comment %}
+            <p class="text-muted text-center"> Don't have an account? <a
+                    href="{% url 'account:register' %}">Register</a>
+                with us</p>
+            <p class="text-muted text-center line"><span> or </span></p>
+            <div class="social_logins text-center">
+                <p class="text-muted">Login with</p>
+                <a href="{% url 'social:begin' 'github' %}"><img class="social_icon"
+                        src='{% static "account/image/github_icon.png" %}'></a>
+            </div>
+            {% endcomment %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock%}

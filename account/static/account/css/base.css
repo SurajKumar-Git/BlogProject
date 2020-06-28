@@ -1,0 +1,16 @@
+.custom_card_header {
+    text-align: center;
+    font-size: larger;
+    font-weight: 600;
+    background-color: #0096ff;
+    color: #fff;
+}
+
+.card_space {
+    padding:20px 20px;
+}
+
+.invalid {
+    color: red;
+    font-size: small;
+}

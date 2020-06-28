@@ -1,0 +1,32 @@
+#login {
+    width: 40%;
+    margin: auto;
+}
+
+
+#login_form {
+    padding-bottom: 5px;
+}
+
+.social_icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.line{ 
+    display: flex; 
+    flex-direction: row; 
+    padding: 0 5px;
+} 
+
+.line span{ 
+    padding: 0 10px;
+}
+
+.line:before, .line:after { 
+    content: ""; 
+    flex: 1 1; 
+    border-bottom: 1px solid lightgray; 
+    margin: auto; 
+} 
