@@ -13,7 +13,8 @@ class CommentQuerySet(models.QuerySet):
 class Comment(models.Model):
 
     message = models.TextField()
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name="post_comments")
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
