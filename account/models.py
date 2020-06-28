@@ -6,9 +6,11 @@ from django.utils.text import slugify
 
 
 class User(AbstractUser):
-    pic = models.ImageField(blank=True)
+    pic = models.ImageField(blank=True, default="ava.png")
     bio = models.TextField(max_length=300, blank=True)
     slug = models.SlugField(blank=True, unique=True)
+
+    REQUIRED_FIELDS = ['email', 'fist_name', 'last_name']
 
     def __str__(self):
         return self.username
