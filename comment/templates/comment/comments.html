@@ -1,8 +1,16 @@
+{% load static %}
 <div class="add_comment">
     <div class="form-group row text-center">
+        {% if user.is_authenticated %}
         <div class="col-sm-1 mx-auto">
             <img src="{{ user.get_pic.url }}" class="rounded-circle z-depth-0" alt="avatar image" height="60">
         </div>
+        {% else %}
+        <div class="col-sm-1 mx-auto">
+            <img src="{% static 'comment/image/ava.png' %}" class="rounded-circle z-depth-0" alt="avatar image"
+                height="60">
+        </div>
+        {% endif %}
         <!-- form for comment -->
         <div class="col-sm-11 py-2">
             <form method="post" id="comment_form" action="{% url 'comment:post_comments' post.id %}">
