@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'comment.apps.CommentConfig',
     'like.apps.LikeConfig',
+    'contact_us.apps.ContactUsConfig',
     'widget_tweaks',
     'django_summernote',
     'django_cleanup.apps.CleanupConfig',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',   # for social auth
 ]
 
 ROOT_URLCONF = 'BlogProject.urls'
@@ -72,6 +75,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # for social auth
+                'social_django.context_processors.backends',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -138,7 +144,7 @@ MEDIA_URL = "/media/"
 AUTH_USER_MODEL = "account.User"
 
 # Auth Settings
-LOGIN_REDIRECT_URL = reverse_lazy("blog:home")
+LOGIN_REDIRECT_URL = reverse_lazy("account:user_profile")
 LOGOUT_REDIRECT_URL = reverse_lazy("account:login")
 
 
@@ -149,3 +155,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Login Url Setting
 LOGIN_URL = reverse_lazy("account:login")
 LOGOUT_URL = reverse_lazy("account:logout")
+
+# Authentication Backend
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+    'account.backends.EmailBackend',
+]
+
+# Social auth keys
+SOCIAL_AUTH_GITHUB_KEY = '8162f5e941c2ec384311'
+SOCIAL_AUTH_GITHUB_SECRET = '52684246f3ad431f37cd46a256a14a13c9696acc'

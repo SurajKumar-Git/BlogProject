@@ -24,5 +24,7 @@ urlpatterns = [
     path("account/", include("account.urls")),
     path("like/", include("like.urls")),
     path("comment/", include("comment.urls")),
+    path('contact_us/', include("contact_us.urls")),
     path('summernote/', include('django_summernote.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -8,6 +8,7 @@ from account.forms import LoginForm, RegisterForm, ProfileForm
 from django.contrib.auth import get_user_model, authenticate, login
 from django.http import HttpResponseRedirect
 from blog.views import AuthorBlogs, AuthorBlogsPublished
+from social_django.models import UserSocialAuth
 # Create your views here.
 
 
@@ -74,21 +75,21 @@ class PasswordChangeDoneView(views.PasswordChangeDoneView):
 class Profile(mixins.LoginRequiredMixin, AuthorBlogs):
     template_name = "account/profile.html"
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(AuthorBlogs, self).get_context_data()
-    #     user = self.request.user
+    def get_context_data(self, **kwargs):
+        context = super(AuthorBlogs, self).get_context_data()
+        user = self.request.user
 
-    #     try:
-    #         github_login = user.social_auth.get(provider='github')
-    #     except UserSocialAuth.DoesNotExist:
-    #         github_login = None
+        try:
+            github_login = user.social_auth.get(provider='github')
+        except UserSocialAuth.DoesNotExist:
+            github_login = None
 
-    #     # can_disconnect = (user.social_auth.count() > 1 or user.has_usable_password())
-    #     can_disconnect = user.has_usable_password()
+        # can_disconnect = (user.social_auth.count() > 1 or user.has_usable_password())
+        can_disconnect = user.has_usable_password()
 
-    #     context["github_login"] = github_login
-    #     context["can_disconnect"] = can_disconnect
-    #     return context
+        context["github_login"] = github_login
+        context["can_disconnect"] = can_disconnect
+        return context
 
 
 class PublicProfileView(AuthorBlogsPublished):

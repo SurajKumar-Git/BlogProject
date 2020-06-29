@@ -36,8 +36,6 @@
                     <input type="submit" class="btn btn-primary form-control" value="Login">
                 </div>
             </form>
-
-            {% comment %}
             <p class="text-muted text-center"> Don't have an account? <a
                     href="{% url 'account:register' %}">Register</a>
                 with us</p>
@@ -47,7 +45,6 @@
                 <a href="{% url 'social:begin' 'github' %}"><img class="social_icon"
                         src='{% static "account/image/github_icon.png" %}'></a>
             </div>
-            {% endcomment %}
         </div>
     </div>
 </div>

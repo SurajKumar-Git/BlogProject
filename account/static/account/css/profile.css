@@ -58,3 +58,7 @@ tr {
     color: black;
 }
 
+.invalid {
+    color: red;
+    font-size: small;
+}
