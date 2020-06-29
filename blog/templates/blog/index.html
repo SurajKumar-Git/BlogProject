@@ -17,9 +17,12 @@
                     <a href="{% url 'blog:blog_detail' post.get_slug%}"><img class="card-img-top card-img"
                             src="{{ post.get_image.url }}" alt="Card image cap"></a>
                     <div class="card-body">
-                        <h4 class="card-title"><a
-                                href="{% url 'blog:blog_detail' post.get_slug%}">{{ post.get_title }}</a></h4>
-                        <p>by <a class="font-weight-bold">{{ post.author.get_username }}</a></p>
+                        <h4 class="card-title clickable" data-href="{% url 'blog:blog_detail' post.get_slug%}">
+                            {{ post.get_title }}</h4>
+                        <p>by <span class=" font-weight-bold clickable"
+                                data-href="{% url 'account:user_public_profile' post.author.get_slug %}">
+                                {{ post.author.get_username }}</span>
+                        </p>
                         <p class="card-text ">{{ post.get_description }}</p>
                     </div>
                     <div class="card-footer">
@@ -27,8 +30,9 @@
                             <ul class="list-unstyled list-inline m-0">
                                 <li class="list-inline-item ">Last Updated: {{ post.modified_date|timesince }} ago
                                 </li>
-                                <li class="list-inline-item pl-2"><a href="#"><i class="far fa-thumbs-up pl-1">
-                                        </i> {{ post.get_post_like_count }}</a></li>
+                                <li class="list-inline-item pl-2"><i class="far fa-thumbs-up pl-1">
+                                    </i> {{ post.get_post_like_count }} Like{{ post.get_post_like_count|pluralize }}
+                                </li>
                             </ul>
                         </div>
                     </div>

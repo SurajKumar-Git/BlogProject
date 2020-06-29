@@ -22,11 +22,12 @@
             </div>
             <div class="card-footer d-flex flex-row align-content-stretch flex-nowrap">
                 <div class="blog_author_avatar">
-                    <img class="rounded-circle clickable" src="{{ post.get_author.get_pic.url}}" data-href="#"
-                        height="150">
+                    <img class="rounded-circle clickable" src="{{ post.get_author.get_pic.url}}"
+                        data-href="{% url 'account:user_public_profile' post.get_author.get_slug %}" height="150">
                 </div>
                 <div class="author">
-                    <h5 class="name clickable" data-href="">
+                    <h5 class="name clickable"
+                        data-href="{% url 'account:user_public_profile' post.get_author.get_slug %}">
                         {{ post.get_author.get_full_name }}</h5>
                     <p class="about">{{ post.get_author.get_bio }}</p>
                 </div>
