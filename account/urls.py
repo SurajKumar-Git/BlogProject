@@ -9,7 +9,6 @@ urlpatterns = [
     path("login/", LoginView.as_view(), name='login'),
     path("register/", RegisterView.as_view(), name="register"),
     path("profile/", Profile.as_view(), name="user_profile"),
-    path("profile/", Profile.as_view(), name="user_profile"),
     path("profile/<slug:slug>/view", PublicProfileView.as_view(),
          name="user_public_profile"),
     path("profile/<slug:slug>/update",
