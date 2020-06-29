@@ -18,7 +18,7 @@
             <div class="card-body">
                 <p class="date">Last Updated - {{ post.modified_date|timesince }}</p>
                 <p class="card-text">{{ post.get_description }}</p>
-                <p class="card-text">{{ post.get_content }}</p>
+                <p class="card-text">{{ post.get_content|safe }}</p>
             </div>
             <div class="card-footer d-flex flex-row align-content-stretch flex-nowrap">
                 <div class="blog_author_avatar">
