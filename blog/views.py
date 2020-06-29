@@ -4,6 +4,7 @@ from django.views import generic
 from django.contrib.auth import mixins
 from django.urls import reverse_lazy
 from blog.forms import PostForm
+from django.db.models import Q
 
 # Create your views here.
 
@@ -20,6 +21,7 @@ class HomeView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['all_post_count'] = Post.posts.published_posts().count()
         context['categories'] = Category.objects.all()
         return context
 
@@ -113,3 +115,12 @@ class AuthorBlogsDetailView(mixins.LoginRequiredMixin, mixins.PermissionRequired
 
     def test_func(self):
         return self.request.user == Post.objects.get(slug=self.kwargs["slug"]).author
+
+
+class SearchBlogs(HomeView):
+    def get_queryset(self):
+        search = self.request.GET.get("query")
+        return Post.objects.filter(
+            Q(status="P"),
+            Q(title__icontains=search) | Q(content__icontains=search)
+        )

@@ -38,9 +38,10 @@
                     </li>
                     {% endif %}
                 </ul>
-                <form class="mx-2 my-auto d-inline w-50">
+                <form class="mx-2 my-auto d-inline w-50" method="GET" action="{% url 'blog:blog_search' %}">
                     <div class="input-group">
-                        <input type="text" class="form-control border border-right-0" placeholder="Search...">
+                        <input type="text" class="form-control border border-right-0" name="query"
+                            placeholder="Search for Blogs">
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary border border-left-0" type="submit">
                                 <i class="fa fa-search"></i>

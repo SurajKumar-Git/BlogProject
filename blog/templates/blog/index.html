@@ -57,7 +57,7 @@
                         <td>
                             <a href="{% url 'blog:home' %}">All</a>
                         </td>
-                        <td>{{ posts.count }}</td>
+                        <td>{{ all_post_count }}</td>
                     </tr>
                     {% for category in categories %}
                     <tr>
