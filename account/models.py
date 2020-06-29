@@ -37,4 +37,4 @@ class User(AbstractUser):
         self.slug = slug
 
     def get_slug(self):
-        return slug
+        return self.slug
