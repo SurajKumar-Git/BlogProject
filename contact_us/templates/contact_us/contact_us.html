@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block css_link %}
+<link href="{% static 'contact_us/css/contact_us.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="container content flex-fill">
+    <div class="card">
+        <div class="card-header custom_card_header">
+            Contact Us
+        </div>
+        <div class="card-body">
+            {% if message %}
+            <p class="text-center">{{ message }}</p>
+            {% endif %}
+            <form id="contact_us" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+                {% endfor %}
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary form-control" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

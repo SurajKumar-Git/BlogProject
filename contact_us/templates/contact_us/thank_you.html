@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Thank You{% endblock %}
+
+{% block content %}
+<div class="text-center flex-fill content">
+    <h3>Thanks for contacting us! We will be in touch with you shortly.</h3>
+    <p>You will recieve the response within 24 hrs. While we do our best to answer your queries quickly, You may explore
+        our <a href="{% url 'blog:home' %}">blogs</a>
+        <br>Thanks in advance for your patience.
+        <br>Have a great day!
+    </p>
+</div>
+{% endblock %}

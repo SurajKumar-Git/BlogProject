@@ -1,0 +1,18 @@
+.custom_card_header {
+    text-align: center;
+    font-size: larger;
+    font-weight: 600;
+    background-color: #0096ff;
+    color: #fff;
+}
+.container {
+    width: 40%;
+}
+
+#contact_us {
+    padding: 30px 30px;
+}
+
+.content {
+    margin-bottom: 20px;
+}
