@@ -1,6 +1,6 @@
 <div class="row">
     <h5 class="name clickable" data-href="">
-        {{ comment.get_user.get_full_name }} | {{ comment.date_modified }}
+        {{ comment.get_user.get_full_name }} | <small>{{ comment.date_modified|timesince }} ago</small>
     </h5>
     {% if user.is_authenticated and comment.get_user == user %}
     <div class="ml-auto">

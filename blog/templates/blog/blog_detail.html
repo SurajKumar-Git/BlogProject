@@ -16,7 +16,7 @@
             <img class="card-img-top" src="{{ post.get_image.url }}" alt="Card image cap" height="600px">
             {% endif %}
             <div class="card-body">
-                <p class="date">Last Updated - {{ post.modified_date }}</p>
+                <p class="date">Last Updated - {{ post.modified_date|timesince }}</p>
                 <p class="card-text">{{ post.get_description }}</p>
                 <p class="card-text">{{ post.get_content }}</p>
             </div>
