@@ -66,6 +66,8 @@
 {% block script %}
 <script>
     $(document).ready(function (event) {
+
+        // For Like and Dislike Button
         $(document).on("click", "#like_dislike", function (event) {
             event.preventDefault();
             var post_id = $(this).attr("value");
@@ -83,7 +85,8 @@
             });
         });
 
-        $(document).on("submit", ".comment_form", function (event) {
+        // For Add Comment
+        $(document).on("submit", "#comment_form", function (event) {
             event.preventDefault();
             $.ajax({
                 type: 'POST',
@@ -91,7 +94,74 @@
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function (response) {
-                    $('#comment-section').html(response['form']);
+                    $("#comments_count").html(response['comments_count']);
+                    $('#comment_section').prepend(response['comment_html']);
+                    $('textarea').val('');
+                },
+                error: function (response, e) {
+                    console.log(response.responseText);
+                },
+            });
+        });
+
+        // For Edit Comment Button
+        $(document).on("click", ".edit", function (event) {
+            event.preventDefault();
+            var comment_id = parseInt($(this).data("id"))
+            var url = "{% url 'comment:comment_edit' 12 %}".replace("12", comment_id.toString());
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType: 'json',
+                success: function (response) {
+                    $("#comment_message_" + comment_id).html(response["comment_form_html"])
+                },
+                error: function (response, e) {
+                    console.log(response.responseText);
+                },
+            });
+        });
+
+        // For Edit Comment form
+        $(document).on("submit", ".edit_comment_form", function (event) {
+            event.preventDefault();
+            var comment_id = parseInt($(this).parent().attr("id").replace("comment_message_", ""));
+            var url = "{% url 'comment:comment_edit' 12 %}".replace("12", comment_id.toString());
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (response) {
+
+                    $("#comment_message_" + comment_id).html(response["comment_html"])
+                },
+                error: function (response, e) {
+                    console.log(response.responseText);
+                },
+            });
+        });
+
+        // Delete Comment model
+        $('#deletemodel').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var modal = $(this)
+            modal.find('.delete_comment').attr("id", id)
+        })
+
+        // Listen to Delete button and call ajax request for delete
+        $(document).on("click", ".delete_comment", function (event) {
+            event.preventDefault();
+            var comment_id = parseInt($(this).attr("id"));
+            var url = "{% url 'comment:comment_delete' 1 %}".replace("1", comment_id.toString());
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: { 'csrfmiddlewaretoken': '{{ csrf_token }}' },
+                dataType: 'json',
+                success: function (response) {
+                    $("#comment_" + comment_id).remove()
                     $("#comments_count").html(response['comments_count']);
                 },
                 error: function (response, e) {
@@ -99,6 +169,7 @@
                 },
             });
         });
+
     });
 </script>
 {% endblock%}

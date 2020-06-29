@@ -1,0 +1,28 @@
+<!-- Comment html  -->
+
+<tr id="comment_{{ comment.id }}">
+    <td>
+        <div class="comment_box d-flex flex-row">
+            <div class="commenter_avatar">
+                <img class="rounded-circle clickable" src="{{ comment.get_user.get_pic.url }}" data-href="#"
+                    height="60">
+            </div>
+            <div class="commenter ml-5 flex-fill" id="comment_message_{{ comment.id }}">
+                <div class="row">
+                    <h5 class="name clickable" data-href="">
+                        {{ comment.get_user.get_full_name }} | {{ comment.date_modified }}
+                    </h5>
+                    {% if user.is_authenticated and comment.get_user == user %}
+                    <div class="ml-auto">
+                        <button class="edit btn btn-outline-primary" type="button"
+                            data-id="{{ comment.id }}">Edit</button>
+                        <button class="delete btn btn-outline-danger" type="button" data-toggle="modal"
+                            data-target="#deletemodel" data-id="{{ comment.id }}">Delete</button>
+                    </div>
+                    {% endif %}
+                </div>
+                <p class="comment">{{ comment.get_message }}</p>
+            </div>
+        </div>
+    </td>
+</tr>
