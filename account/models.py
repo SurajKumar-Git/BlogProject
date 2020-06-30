@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
+from account.image_resize import resize
 
 # Create your models here.
 
@@ -18,7 +19,7 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         slug_str = "%s-%s" % (self.get_full_name(), self.id)
         self.set_slug(slugify(slug_str))
-        # self.pic = make_thumbnail(self.pic, size=(200, 200))
+        self.pic = resize(self.pic, size=(200, 200))
         super().save(*args, **kwargs)
 
     def set_pic(self, pic):
