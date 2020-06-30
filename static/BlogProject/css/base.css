@@ -1,14 +1,18 @@
 body {
     font-family: 'Raleway', sans-serif;
     min-height:100vh;
-    background-color: #f2f6ff;
+    background-color: #fafcff;
 }
 
 .content {
     margin-top: 100px;
 }
+.bg-light {
+    background-color: #f2fffe !important;
+}
+
 .footer {
-    background-color: #f8f9fa;
+    background-color: #f2fffe;
 }
 
 .footer-copyright {
