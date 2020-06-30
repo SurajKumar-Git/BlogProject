@@ -21,6 +21,12 @@ class RegisterForm(UserCreationForm):
             'password2': 'Enter the same password as before, for verification.',
         }
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if get_user_model().objects.filter(email=email).exists():
+            raise forms.ValidationError("Email already in use")
+        return email
+
 
 class ProfileForm(forms.ModelForm):
     class Meta:
