@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.conf import settings
+from django.db.models import Count
 
 # Create your models here.
 
@@ -63,6 +64,9 @@ class PostQuerySet(models.QuerySet):  # Custom Model Manager
 
     def category_posts(self, category_slug):
         return self.filter(category__slug=category_slug)
+
+    def top_liked_post(self, top):
+        return self.annotate(like_count=Count('post_likes')).order_by("-like_count")[:top]
 
 
 class Post(models.Model):
