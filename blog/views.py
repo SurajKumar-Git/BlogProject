@@ -60,7 +60,7 @@ class AddBlogPost(mixins.LoginRequiredMixin, mixins.PermissionRequiredMixin, gen
     form_class = PostForm
     model = Post
     template_name = "blog/blog_form.html"
-    success_url = reverse_lazy('account:profile')
+    success_url = reverse_lazy('account:user_profile')
     extra_context = {"Add_Update": "Add Blog"}
 
     def form_valid(self, form):
@@ -73,7 +73,7 @@ class UpdateBlogPost(mixins.LoginRequiredMixin, mixins.PermissionRequiredMixin, 
     form_class = PostForm
     model = Post
     template_name = "blog/blog_form.html"
-    success_url = reverse_lazy('account:profile')
+    success_url = reverse_lazy('account:user_profile')
     extra_context = {"Add_Update": "Update Blog"}
 
     # Update should not be accessible by other authors
@@ -84,7 +84,7 @@ class UpdateBlogPost(mixins.LoginRequiredMixin, mixins.PermissionRequiredMixin, 
 class DeleteBlogPost(mixins.LoginRequiredMixin, mixins.PermissionRequiredMixin, mixins.UserPassesTestMixin, generic.DeleteView):
     permission_required = ('blog.delete_post',)
     model = Post
-    success_url = reverse_lazy('account:profile')
+    success_url = reverse_lazy('account:user_profile')
     template_name = "blog/delete_blog_post.html"
     context_object_name = "post"
 
