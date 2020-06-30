@@ -13,8 +13,11 @@
         </form>
         {% else %}
         <button type="button" class="btn btn-primary btn-sm" disabled>Disconnect from GitHub</button>
-        <p class="invalid">You must <a href="{% url 'account:password_change' %}">define a password</a> for your account
-            before disconnecting from GitHub.</p>
+        <p class="invalid">You must <a href="{% url 'account:password_change' %}">define a password</a> and set
+            <a href="{% url 'account:edit_user_profile' user.get_slug %}">Email</a> for your account before
+            disconnecting
+            from GitHub.
+        </p>
         {% endif %}
     </td>
     {% else %}
