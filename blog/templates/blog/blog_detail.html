@@ -37,28 +37,15 @@
     </div>
     <div class="col-sm-3 right-section">
         <div class="related-post">
-            <h4>Related Blogs</h4>
+            <h4>Other Related Blogs</h4>
+            {% for blog in related_blogs %}
             <div class="card mb-3">
-                <img class="card-img-top card-img" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
-                    alt="Card image cap" height="200">
+                <img class="card-img-top card-img" src="{{ blog.get_image.url }}" alt="Card image cap" height="200">
                 <div class="card-body">
-                    <p class="card-title">Card Title</p>
+                    <p class="card-title">{{ blog.get_title }}</p>
                 </div>
             </div>
-            <div class="card mb-3">
-                <img class="card-img-top card-img" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
-                    alt="Card image cap" height="200">
-                <div class="card-body">
-                    <p class="card-title">Card Title</p>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <img class="card-img-top card-img" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
-                    alt="Card image cap" height="200">
-                <div class="card-body">
-                    <p class="card-title">Card Title</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
