@@ -102,7 +102,9 @@
                 url: url,
                 dataType: 'json',
                 success: function (response) {
-                    $("#comment_message_" + comment_id).html(response["comment_form_html"])
+                    var comment_box = $("#comment_message_" + comment_id).find(".comment_message_box");
+                    comment_box.css("display", "none");
+                    $("#comment_message_" + comment_id).append(response["comment_form_html"]);
                 },
                 error: function (response, e) {
                     console.log(response.responseText);
@@ -131,12 +133,19 @@
             });
         });
 
+        //For Cancel Edit Form
+        $(document).on('click', ".cancel_edit", function (event) {
+            var parent = $(this).parents(".edit_comment_form");
+            parent.siblings(".comment_message_box").css("display", "block");
+            parent.remove();
+        });
+
         // Delete Comment model
         $('#deletemodel').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
-            var id = button.data('id')
-            var modal = $(this)
-            modal.find('.delete_comment').attr("id", id)
+            var id = button.data('id');
+            var modal = $(this);
+            modal.find('.delete_comment').attr("id", id);
         })
 
         // Listen to Delete button and call ajax request for delete
@@ -150,7 +159,7 @@
                 data: { 'csrfmiddlewaretoken': '{{ csrf_token }}' },
                 dataType: 'json',
                 success: function (response) {
-                    $("#comment_" + comment_id).remove()
+                    $("#comment_" + comment_id).remove();
                     $("#comments_count").html(response['comments_count']);
                 },
                 error: function (response, e) {
