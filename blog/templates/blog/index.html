@@ -95,27 +95,16 @@
         </div>
         <div class="popular-post">
             <h4>Popular Blogs</h4>
-            <div class="card mb-3">
-                <img class="card-img-top card-img" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
-                    alt="Card image cap" height="200">
+
+            {% for post in popular_posts %}
+            <div class="card mb-3 clickable" data-href="{% url 'blog:blog_detail' post.get_slug %}">
+                <img class="card-img-top card-img" src="{{ post.get_image.url }}" alt="Card image cap" height="200">
                 <div class="card-body">
-                    <p class="card-title">Card Title</p>
+                    <p class="card-title">{{ post.get_title }}</p>
                 </div>
             </div>
-            <div class="card mb-3">
-                <img class="card-img-top card-img" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
-                    alt="Card image cap" height="200">
-                <div class="card-body">
-                    <p class="card-title">Card Title</p>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <img class="card-img-top card-img" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
-                    alt="Card image cap" height="200">
-                <div class="card-body">
-                    <p class="card-title">Card Title</p>
-                </div>
-            </div>
+            {% endfor %}
+
         </div>
     </div>
 </div>

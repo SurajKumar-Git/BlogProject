@@ -24,6 +24,8 @@ class HomeView(generic.ListView):
         context = super().get_context_data(**kwargs)
         context['all_post_count'] = Post.posts.published_posts().count()
         context['categories'] = Category.objects.all()
+        context['popular_posts'] = Post.posts.top_liked_post(
+            3)  # Gets top 3 liked posts
         return context
 
 
