@@ -44,6 +44,8 @@ class BlogDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = context.get("post")
+        context["related_blogs"] = Post.posts.category_posts(
+            post.get_category().get_slug()).exclude(id=post.id)
         if self.request.user.is_authenticated:
             context['is_liked'] = post.is_liked_post(self.request.user)
         context["like_count"] = post.get_post_like_count()
