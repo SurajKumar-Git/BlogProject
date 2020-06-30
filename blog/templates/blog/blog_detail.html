@@ -39,7 +39,7 @@
         <div class="related-post">
             <h4>Other Related Blogs</h4>
             {% for blog in related_blogs %}
-            <div class="card mb-3">
+            <div class="card mb-3 clickable" data-href="{% url 'blog:blog_detail' blog.get_slug %}">
                 <img class="card-img-top card-img" src="{{ blog.get_image.url }}" alt="Card image cap" height="200">
                 <div class="card-body">
                     <p class="card-title">{{ blog.get_title }}</p>
