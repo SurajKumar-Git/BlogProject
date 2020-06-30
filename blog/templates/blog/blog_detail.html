@@ -134,8 +134,9 @@
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function (response) {
-
-                    $("#comment_message_" + comment_id).html(response["comment_html"])
+                    $("#comment_message_" + comment_id).html(response["comment_html"]);
+                    var comment_row = $("#comment_" + comment_id).detach()
+                    comment_row.prependTo("#comment_section")
                 },
                 error: function (response, e) {
                     console.log(response.responseText);
