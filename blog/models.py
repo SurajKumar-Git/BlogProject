@@ -76,7 +76,7 @@ class Post(models.Model):
         Category, on_delete=models.CASCADE, related_name="post_category")
     image = models.ImageField(blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
-    modified_date = models.DateField(auto_now=True)
+    modified_date = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True, blank=True)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
