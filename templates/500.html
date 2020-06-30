@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block title %}Internal Server Error{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Internal Server Error. Please <a href="{% url 'contact:contact' %}">Contact Us</a></h1>
+{% endblock %}
