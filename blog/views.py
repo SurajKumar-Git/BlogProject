@@ -121,6 +121,12 @@ class AuthorBlogsDetailView(mixins.LoginRequiredMixin, mixins.PermissionRequired
     def test_func(self):
         return self.request.user == Post.objects.get(slug=self.kwargs["slug"]).author
 
+    def get_template_names(self):
+        if Post.objects.get(slug=self.kwargs["slug"]).status == "P":
+            return "blog/blog_detail.html"
+        else:
+            return "blog/draft_blog.html"
+
 
 class SearchBlogs(HomeView):
     def get_queryset(self):
