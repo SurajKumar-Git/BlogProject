@@ -85,7 +85,7 @@ class Profile(mixins.LoginRequiredMixin, AuthorBlogs):
             github_login = None
 
         # can_disconnect = (user.social_auth.count() > 1 or user.has_usable_password())
-        can_disconnect = user.has_usable_password()
+        can_disconnect = user.has_usable_password() and user.is_email_set()
 
         context["github_login"] = github_login
         context["can_disconnect"] = can_disconnect
