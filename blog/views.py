@@ -18,6 +18,7 @@ class HomeView(generic.ListView):
     queryset = Post.posts.published_posts()
     context_object_name = 'posts'
     template_name = "blog/index.html"
+    paginate_by = 9
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
