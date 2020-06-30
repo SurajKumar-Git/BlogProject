@@ -18,10 +18,12 @@
                 <textarea placeholder="Write Your Comment" name="message" class="form-control" rows=2></textarea>
                 {% if user.is_authenticated %}
                 <div class="text-right mt-2">
+                    <button type="reset" class="btn btn-secondary">Cancel</button>
                     <button type="submit" class="btn btn-primary">Comment</button>
                 </div>
                 {% else %}
                 <div class="text-right mt-2">
+                    <button type="reset" class="btn btn-secondary disabled" disabled>Cancel</button>
                     <button class="btn btn-primary disabled" disabled>Comment</button>
                 </div>
                 {% endif %}
