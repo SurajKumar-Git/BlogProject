@@ -24,7 +24,7 @@ class HomeView(generic.ListView):
         context = super().get_context_data(**kwargs)
         context['all_post_count'] = Post.posts.published_posts().count()
         context['categories'] = Category.objects.all()
-        context['popular_posts'] = Post.posts.top_liked_post(
+        context['popular_posts'] = Post.posts.published_posts().top_liked_post(
             3)  # Gets top 3 liked posts
         return context
 
@@ -44,7 +44,7 @@ class BlogDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = context.get("post")
-        context["related_blogs"] = Post.posts.category_posts(
+        context["related_blogs"] = Post.posts.published_posts().category_posts(
             post.get_category().get_slug()).exclude(id=post.id)[:4]
         if self.request.user.is_authenticated:
             context['is_liked'] = post.is_liked_post(self.request.user)
