@@ -39,3 +39,6 @@ class User(AbstractUser):
 
     def get_slug(self):
         return self.slug
+
+    def is_email_set(self):
+        return True if self.email else False
