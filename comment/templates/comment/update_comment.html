@@ -1,13 +1,15 @@
-<div class="row">
-    <h5 class="name clickable" data-href="">
-        {{ comment.get_user.get_full_name }} | <small>{{ comment.date_modified|timesince }} ago</small>
-    </h5>
-    {% if user.is_authenticated and comment.get_user == user %}
-    <div class="ml-auto">
-        <button class="edit btn btn-outline-primary" type="button" data-id="{{ comment.id }}">Edit</button>
-        <button class="delete btn btn-outline-danger" type="button" data-toggle="modal" data-target="#deletemodel"
-            data-id="{{ comment.id }}">Delete</button>
+<div class="comment_message_box">
+    <div class="row">
+        <h5 class="name clickable" data-href="">
+            {{ comment.get_user.get_full_name }} | <small>{{ comment.date_modified|timesince }} ago</small>
+        </h5>
+        {% if user.is_authenticated and comment.get_user == user %}
+        <div class="ml-auto">
+            <button class="edit btn btn-outline-primary" type="button" data-id="{{ comment.id }}">Edit</button>
+            <button class="delete btn btn-outline-danger" type="button" data-toggle="modal" data-target="#deletemodel"
+                data-id="{{ comment.id }}">Delete</button>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
+    <p class="comment">{{ comment.get_message }}</p>
 </div>
-<p class="comment">{{ comment.get_message }}</p>
