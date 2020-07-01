@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from django.urls import reverse_lazy
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +24,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&9bdm_su&s%(9z9uy0_*3qag5kb=4-6+-7_s4j^7fdwm+#fl*5'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -121,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kolkata'
+TIME_ZONE = config('TIME_ZONE')
 
 USE_I18N = True
 
@@ -164,5 +165,5 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Social auth keys
-SOCIAL_AUTH_GITHUB_KEY = '8162f5e941c2ec384311'
-SOCIAL_AUTH_GITHUB_SECRET = '52684246f3ad431f37cd46a256a14a13c9696acc'
+SOCIAL_AUTH_GITHUB_KEY = config('SOCIAL_AUTH_GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = config('SOCIAL_AUTH_GITHUB_SECRET')
